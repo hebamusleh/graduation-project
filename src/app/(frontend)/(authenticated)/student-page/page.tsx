@@ -1,6 +1,12 @@
+import { Hero, HomeClient } from '@/components/organizations'
 
-const page = ()=>{
-    return <>student pages </>
+const page = () => {
+  return (
+    <>
+      <Hero isMentor={false} />
+      <HomeClient />
+    </>
+  )
 }
 
-export default page;
+export default page
