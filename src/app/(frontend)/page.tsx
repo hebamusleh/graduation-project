@@ -1,7 +1,24 @@
+import {
+  Features,
+  Footer,
+  HeroSection,
+  HowItWorks,
+  MentorCards,
+  Navbar,
+} from '@/components/molecules'
 import './styles.css'
 
 export default async function HomePage() {
-  return  <h1 className="text-3xl font-bold underline text-center">
-      Hello world!
-    </h1>
+  return (
+    <>
+      <Navbar />
+      <main className="container mx-auto">
+        <HeroSection />
+        <MentorCards />
+        <Features />
+        <HowItWorks />
+      </main>
+      <Footer />
+    </>
+  )
 }
