@@ -11,6 +11,15 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Students } from './collections/Students'
 import { Mentors } from './collections/Mentors'
+import { Tracks } from './collections/Tracks'
+import { TracksCategory } from './collections/TracksCategory'
+import { Articles } from './collections/Articles'
+import { Resources } from './collections/Resources'
+import { SavedArticles } from './collections/SavedArticles'
+import { SavedPosts } from './collections/SavedPosts'
+import { Posts } from './collections/Posts'
+import { FavouriteTracks } from './collections/FavouriteTracks'
+import { Sections } from './collections/Sections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -19,10 +28,10 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     importMap: {
-      baseDir: path.resolve(dirname),
+  baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media , Students , Mentors],
+  collections: [Users, Media , Students , Mentors , Tracks , TracksCategory , Articles , Resources , SavedArticles , SavedPosts , Posts , FavouriteTracks ,Sections],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

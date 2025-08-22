@@ -64,8 +64,6 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
-    students: StudentAuthOperations;
-    mentors: MentorAuthOperations;
   };
   blocks: {};
   collections: {
@@ -73,6 +71,15 @@ export interface Config {
     media: Media;
     students: Student;
     mentors: Mentor;
+    tracks: Track;
+    tracksCategory: TracksCategory;
+    articles: Article;
+    resources: Resource;
+    'saved-articles': SavedArticle;
+    'saved-posts': SavedPost;
+    posts: Post;
+    'favourite-tracks': FavouriteTrack;
+    sections: Section;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,6 +90,15 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     students: StudentsSelect<false> | StudentsSelect<true>;
     mentors: MentorsSelect<false> | MentorsSelect<true>;
+    tracks: TracksSelect<false> | TracksSelect<true>;
+    tracksCategory: TracksCategorySelect<false> | TracksCategorySelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    resources: ResourcesSelect<false> | ResourcesSelect<true>;
+    'saved-articles': SavedArticlesSelect<false> | SavedArticlesSelect<true>;
+    'saved-posts': SavedPostsSelect<false> | SavedPostsSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
+    'favourite-tracks': FavouriteTracksSelect<false> | FavouriteTracksSelect<true>;
+    sections: SectionsSelect<false> | SectionsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -93,16 +109,9 @@ export interface Config {
   globals: {};
   globalsSelect: {};
   locale: null;
-  user:
-    | (User & {
-        collection: 'users';
-      })
-    | (Student & {
-        collection: 'students';
-      })
-    | (Mentor & {
-        collection: 'mentors';
-      });
+  user: User & {
+    collection: 'users';
+  };
   jobs: {
     tasks: unknown;
     workflows: unknown;
@@ -126,49 +135,15 @@ export interface UserAuthOperations {
     password: string;
   };
 }
-export interface StudentAuthOperations {
-  forgotPassword: {
-    email: string;
-    password: string;
-  };
-  login: {
-    email: string;
-    password: string;
-  };
-  registerFirstUser: {
-    email: string;
-    password: string;
-  };
-  unlock: {
-    email: string;
-    password: string;
-  };
-}
-export interface MentorAuthOperations {
-  forgotPassword: {
-    email: string;
-    password: string;
-  };
-  login: {
-    email: string;
-    password: string;
-  };
-  registerFirstUser: {
-    email: string;
-    password: string;
-  };
-  unlock: {
-    email: string;
-    password: string;
-  };
-}
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: string;
-  password: string | null;
+  firstName: string;
+  lastName: string;
+  roles: 'student' | 'mentor' | 'admin';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -185,6 +160,7 @@ export interface User {
         expiresAt: string;
       }[]
     | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -211,23 +187,16 @@ export interface Media {
  */
 export interface Student {
   id: string;
+  userId: string | User;
+  goal: string;
+  bio: string;
+  birthday: string;
+  major: string;
+  pronoun: string;
+  urlLinkedin?: string | null;
+  isAgree?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -235,23 +204,171 @@ export interface Student {
  */
 export interface Mentor {
   id: string;
+  userId: string | User;
+  bio: string;
+  birthday: string;
+  major: string;
+  pronoun: string;
+  yearsOfExperience: number;
+  skills?: string | null;
+  profilePhoto?: (string | null) | Media;
+  urlLinkedin?: string | null;
+  welcomeStatement?: string | null;
+  isAgree?: boolean | null;
+  expertTrackId?: (string | null) | Track;
+  posts?: (string | Post)[] | null;
+  articles?: (string | Article)[] | null;
+  resources?: (string | Resource)[] | null;
   updatedAt: string;
   createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tracks".
+ */
+export interface Track {
+  id: string;
+  trackName: string;
+  category: string | TracksCategory;
+  trackDescription?: string | null;
+  trackImage?: (string | null) | Media;
+  roadmapLink?: string | null;
+  paragraph?: string | null;
+  favoriteTracks?: (string | FavouriteTrack)[] | null;
+  articles?: (string | Article)[] | null;
+  resources?: (string | Resource)[] | null;
+  mentors?: (string | Mentor)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tracksCategory".
+ */
+export interface TracksCategory {
+  id: string;
+  categoryName: string;
+  tracks?: (string | Track)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "favourite-tracks".
+ */
+export interface FavouriteTrack {
+  id: string;
+  student: string | Student;
+  track: string | Track;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: string;
+  mentor: string | Mentor;
+  track: string | Track;
+  title: string;
+  paragraphs?: string | null;
+  image?: (string | null) | Media;
+  status: 'pending' | 'approved' | 'rejected';
+  rejection_reason?: string | null;
+  views?: number | null;
+  savedArticles?: (string | SavedArticle)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "saved-articles".
+ */
+export interface SavedArticle {
+  id: string;
+  student: string | Student;
+  article: string | Article;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources".
+ */
+export interface Resource {
+  id: string;
+  mentor: string | Mentor;
+  track: string | Track;
+  title?: string | null;
+  linkName?: string | null;
+  link?: string | null;
+  status: 'pending' | 'approved' | 'rejected';
+  rejection_reason?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: string;
+  mentor: string | Mentor;
+  postCategory: 'advice' | 'book_recommendation' | 'success_story' | 'mentor_journey' | 'motivation';
+  post: string;
+  savedPosts?: (string | SavedPost)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "saved-posts".
+ */
+export interface SavedPost {
+  id: string;
+  student: string | Student;
+  post: string | Post;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sections".
+ */
+export interface Section {
+  id: string;
+  name: string;
+  description?: string | null;
+  coverImage?: (string | null) | Media;
+  cardContent?:
     | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
+        title: string;
+        paragraph: string;
+        images?:
+          | {
+              image?: (string | null) | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
       }[]
     | null;
-  password?: string | null;
+  bookRecomndation?:
+    | {
+        book?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  resources?:
+    | {
+        resourcelinks?: string | null;
+        resourceName?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -275,21 +392,48 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'mentors';
         value: string | Mentor;
+      } | null)
+    | ({
+        relationTo: 'tracks';
+        value: string | Track;
+      } | null)
+    | ({
+        relationTo: 'tracksCategory';
+        value: string | TracksCategory;
+      } | null)
+    | ({
+        relationTo: 'articles';
+        value: string | Article;
+      } | null)
+    | ({
+        relationTo: 'resources';
+        value: string | Resource;
+      } | null)
+    | ({
+        relationTo: 'saved-articles';
+        value: string | SavedArticle;
+      } | null)
+    | ({
+        relationTo: 'saved-posts';
+        value: string | SavedPost;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: string | Post;
+      } | null)
+    | ({
+        relationTo: 'favourite-tracks';
+        value: string | FavouriteTrack;
+      } | null)
+    | ({
+        relationTo: 'sections';
+        value: string | Section;
       } | null);
   globalSlug?: string | null;
-  user:
-    | {
-        relationTo: 'users';
-        value: string | User;
-      }
-    | {
-        relationTo: 'students';
-        value: string | Student;
-      }
-    | {
-        relationTo: 'mentors';
-        value: string | Mentor;
-      };
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -299,19 +443,10 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: string;
-  user:
-    | {
-        relationTo: 'users';
-        value: string | User;
-      }
-    | {
-        relationTo: 'students';
-        value: string | Student;
-      }
-    | {
-        relationTo: 'mentors';
-        value: string | Mentor;
-      };
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
   key?: string | null;
   value?:
     | {
@@ -341,7 +476,9 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  password?: T;
+  firstName?: T;
+  lastName?: T;
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -382,44 +519,178 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "students_select".
  */
 export interface StudentsSelect<T extends boolean = true> {
+  userId?: T;
+  goal?: T;
+  bio?: T;
+  birthday?: T;
+  major?: T;
+  pronoun?: T;
+  urlLinkedin?: T;
+  isAgree?: T;
   updatedAt?: T;
   createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "mentors_select".
  */
 export interface MentorsSelect<T extends boolean = true> {
+  userId?: T;
+  bio?: T;
+  birthday?: T;
+  major?: T;
+  pronoun?: T;
+  yearsOfExperience?: T;
+  skills?: T;
+  profilePhoto?: T;
+  urlLinkedin?: T;
+  welcomeStatement?: T;
+  isAgree?: T;
+  expertTrackId?: T;
+  posts?: T;
+  articles?: T;
+  resources?: T;
   updatedAt?: T;
   createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tracks_select".
+ */
+export interface TracksSelect<T extends boolean = true> {
+  trackName?: T;
+  category?: T;
+  trackDescription?: T;
+  trackImage?: T;
+  roadmapLink?: T;
+  paragraph?: T;
+  favoriteTracks?: T;
+  articles?: T;
+  resources?: T;
+  mentors?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tracksCategory_select".
+ */
+export interface TracksCategorySelect<T extends boolean = true> {
+  categoryName?: T;
+  tracks?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  mentor?: T;
+  track?: T;
+  title?: T;
+  paragraphs?: T;
+  image?: T;
+  status?: T;
+  rejection_reason?: T;
+  views?: T;
+  savedArticles?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resources_select".
+ */
+export interface ResourcesSelect<T extends boolean = true> {
+  mentor?: T;
+  track?: T;
+  title?: T;
+  linkName?: T;
+  link?: T;
+  status?: T;
+  rejection_reason?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "saved-articles_select".
+ */
+export interface SavedArticlesSelect<T extends boolean = true> {
+  student?: T;
+  article?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "saved-posts_select".
+ */
+export interface SavedPostsSelect<T extends boolean = true> {
+  student?: T;
+  post?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  mentor?: T;
+  postCategory?: T;
+  post?: T;
+  savedPosts?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "favourite-tracks_select".
+ */
+export interface FavouriteTracksSelect<T extends boolean = true> {
+  student?: T;
+  track?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sections_select".
+ */
+export interface SectionsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  coverImage?: T;
+  cardContent?:
     | T
     | {
+        title?: T;
+        paragraph?: T;
+        images?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
         id?: T;
-        createdAt?: T;
-        expiresAt?: T;
       };
+  bookRecomndation?:
+    | T
+    | {
+        book?: T;
+        id?: T;
+      };
+  resources?:
+    | T
+    | {
+        resourcelinks?: T;
+        resourceName?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
