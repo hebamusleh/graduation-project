@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 
+import { Footer, Header } from '@/components/molecules'
 import React, { ReactNode } from 'react'
 import { getUser } from '../_actions/getUser'
 
@@ -13,7 +14,13 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
     redirect('/login')
     return null
   }
-  return <>{children}</>
+  return (
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+  )
 }
 
-export default Layout;
+export default Layout
