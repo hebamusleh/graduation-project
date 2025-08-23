@@ -87,7 +87,7 @@ export default function TrackDetailClientPage({ slug }: { slug: string }) {
           {track?.resources?.length === 0
             ? null
             : track?.resources?.map((resource: any) => (
-                <div>
+                <div key={resource.linkName}>
                   {resource.link}
                   {resource.linkName}
                 </div>

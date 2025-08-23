@@ -9,9 +9,14 @@ import { useGetSections, useGetTracks } from '@/hooks/services-hooks'
 import { IMAGE_URL } from '@/services/api'
 import Image from 'next/image'
 
-export default function page() {
+interface SectionType {
+  name: string
+  coverImage?: { url: string }
+}
+
+export default function Tracks() {
   const { data, isLoading } = useGetSections()
-  const track = data?.docs.find((section: any) => section.name === 'Tracks')
+  const track = data?.docs.find((section: SectionType) => section.name === 'Tracks')
   const { data: tracksData, isLoading: isTracksLoading } = useGetTracks()
 
   console.log('track data', tracksData?.docs)
@@ -41,10 +46,10 @@ export default function page() {
               Explore The Future Of Tech With Our Specialized Tracks!
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-sm text-gray-600 sm:text-base">
-              Stay ahead in the tech industry with our expertly curated learning tracks, designed to
+              {`Stay ahead in the tech industry with our expertly curated learning tracks, designed to
               equip you with cutting-edge skills. Whether you're passionate about software
               development, AI, cybersecurity, cloud computing, or UX/UI design, we have the perfect
-              track for you!
+              track for you!`}
             </p>
           </div>
         </section>
