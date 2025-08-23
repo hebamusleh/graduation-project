@@ -1,7 +1,12 @@
-type Props = {}
+import { Hero, HomeClient } from '@/components/organizations'
 
-const page = (props: Props) => {
-  return <div>mentors dashboard , ya welcome </div>
+const page = () => {
+  return (
+    <>
+      <Hero isMentor={true} />
+      <HomeClient />
+    </>
+  )
 }
 
 export default page

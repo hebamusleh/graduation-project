@@ -4,7 +4,7 @@ import { ArrowRight } from "@/components/icons";
 import { Card as UICard } from "@/components/ui/card";
 import { CardType } from "@/models";
 import { IMAGE_URL } from "@/services/api";
-import Image from "next/image";
+import Image, { ImageLoaderProps } from "next/image";
 import Link from "next/link";
 
 export default function Card({
@@ -15,6 +15,7 @@ export default function Card({
   href,
 }: CardType) {
   const linkHref = href ?? `/${slug}`;
+
   return (
     <Link href={linkHref} className="m-1 block max-w-sm">
       <UICard className="flex h-full flex-col overflow-hidden rounded-xl border-none bg-white p-2 shadow-sm transition-shadow duration-200 hover:shadow-md">

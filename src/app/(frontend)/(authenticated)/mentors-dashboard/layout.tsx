@@ -3,8 +3,8 @@ import { QueryProvider } from '@/components/molecules/QueryProvider'
 import React from 'react'
 
 export const metadata = {
-  description: 'FOMO Tech - Student Page',
-  title: 'FOMO Tech - Student Page',
+  description: 'FOMO Tech - Mentors Dashboard',
+  title: 'FOMO Tech - Mentors Dashboard',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

@@ -1,40 +1,47 @@
-"use server";
+'use server'
 
-import { headers as getHeaders } from "next/headers";
-import type { Payload } from "payload";
-import { getPayload } from "payload";
+import { headers as getHeaders } from 'next/headers'
+import { getPayload } from 'payload'
 
-import { UsersSelect } from "@/payload-types";
-import configPromise from "@payload-config";
+import { UsersSelect } from '@/payload-types'
+import configPromise from '@payload-config'
 
-export async function getUser(): Promise<UsersSelect | any | null> {
+export async function getUser() {
   const headers = await getHeaders();
-  const payload: Payload = await getPayload({
-    config: await configPromise,
-  });
-  const { user } = await payload.auth({
-    headers,
-  });
+  const payload = await getPayload({ config: await configPromise });
 
+  // Step 1: Authenticate the request
+  const { user } = await payload.auth({ headers });
   if (!user) return null;
 
-  let profile = null;
+  // Step 2: Fetch the full user document using the ID
+  const fullUser = await payload.findByID({
+    collection: "users",
+    id: user.id,
+    depth: 1, // includes relationship fields like userId if needed
+  });
 
-  const roles = Array.isArray(user.roles) ? user.roles : [user.roles];
+  // Step 3: Fetch the related profile
+  let profile = null;
+  const roles = Array.isArray(fullUser.roles)
+    ? fullUser.roles
+    : [fullUser.roles];
 
   if (roles.includes("mentor")) {
-    profile = await payload.find({
+    const result = await payload.find({
       collection: "mentors",
-      where: { userId: { equals: user.id } },
+      where: { userId: { equals: fullUser.id } },
     });
+    profile = result.docs[0] || null;
   }
 
   if (roles.includes("student")) {
-    profile = await payload.find({
+    const result = await payload.find({
       collection: "students",
-      where: { userId: { equals: user.id } },
+      where: { userId: { equals: fullUser.id } },
     });
+    profile = result.docs[0] || null;
   }
 
-  return { ...user, profile: profile?.docs?.[0] || null };
+  return { ...fullUser, profile };
 }

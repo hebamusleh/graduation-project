@@ -3,6 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import LoginForm from "./LoginForm";
 
+
+export const metadata = {
+  description: 'FOMO Tech - Login Page',
+  title: 'FOMO Tech - Login Page',
+}
+
 export default async function page() {
   return (
     <div className="flex min-h-screen">
