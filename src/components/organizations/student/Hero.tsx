@@ -5,7 +5,6 @@ import Image from "next/image";
 
 export default async function Hero({ isMentor }: { isMentor: boolean }) {
    const user = await getUser();
-   console.log("user data ", user);
   return (
     <>
       <section className="-mt-16 bg-blue-50">
