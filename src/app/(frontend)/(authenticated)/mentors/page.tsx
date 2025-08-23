@@ -5,7 +5,7 @@ import Pagination from '@/components/organizations/student/Paagination'
 import { useGetMentors } from '@/hooks/services-hooks'
 import { useSearchParams } from 'next/navigation'
 
-export default function page() {
+export default function MentorPage() {
   const { data, isLoading } = useGetMentors()
   const params = useSearchParams()
   const page = parseInt(params.get('page') ?? '1', 10)
