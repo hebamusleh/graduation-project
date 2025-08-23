@@ -38,7 +38,7 @@ export default function page() {
               slug={m.id}
               name={m.fullName}
               description={m.skills}
-              image={`${m?.coverImage?.url || ''}`}
+              image={`${m?.profilePhoto?.url || ''}`}
             />
           ))
         ) : (
