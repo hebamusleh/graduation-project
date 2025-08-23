@@ -3,7 +3,7 @@ import './styles.css'
 
 export const metadata = {
   description: 'FOMO ',
-  title: 'Payload Blank Template',
+  title: 'FOMO',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

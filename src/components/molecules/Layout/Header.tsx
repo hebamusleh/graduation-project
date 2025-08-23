@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
-  const navItems = ['Home', 'Mentors', 'Favourite', 'Saved']
+  const navItems = ['Home', 'Mentors']
 
   // Next.js navigation hooks
   const pathname = usePathname() || ''

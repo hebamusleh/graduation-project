@@ -1,11 +1,9 @@
-import React from 'react'
+import MentorsBlogClient from '@/components/organizations/student/MentorBlog'
 
-type Props = {}
-
-const page = (props: Props) => {
+export default function page() {
   return (
-    <div>page</div>
+    <main className="container mx-auto flex-grow px-4 py-8">
+      <MentorsBlogClient />
+    </main>
   )
 }
-
-export default page
