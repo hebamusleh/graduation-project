@@ -7,7 +7,7 @@ import { Section } from "@/lib/types";
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="w-full mt-8 p-6 overflow-visible">
+    <main className="w-full mt-8 p-6 overflow-visible max-w-[1500px] mx-auto">
       <div className="relative w-4/5 ml-4 md:ml-10 mb-8 overflow-visible">
         <div className="flex flex-col md:flex-row gap-6">
           <div className="w-full md:w-2/3 text-left space-y-4">
@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
           <div className="relative w-full mt-6 md:mt-0 md:w-1/3">
             <div className="relative md:absolute md:top-0 md:right-[-80px] lg:right-[-160px] w-full overflow-visible">
               <Image
-                src="/assets/images/privacy-policy.svg"
+                src="/assets/images/privacy.png"
                 alt="Privacy Illustration"
                 width={500}
                 height={500}

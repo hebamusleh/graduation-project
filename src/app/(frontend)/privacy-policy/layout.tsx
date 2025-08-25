@@ -4,8 +4,8 @@ import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
-  description: 'FOMO Tech - Contact Page',
-  title: 'FOMO Tech - Contact Page',
+  description: 'FOMO Tech - Privacy Page',
+  title: 'FOMO Tech - Privacy Page',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

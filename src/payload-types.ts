@@ -80,6 +80,7 @@ export interface Config {
     posts: Post;
     'favourite-tracks': FavouriteTrack;
     sections: Section;
+    contact: Contact;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -99,6 +100,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     'favourite-tracks': FavouriteTracksSelect<false> | FavouriteTracksSelect<true>;
     sections: SectionsSelect<false> | SectionsSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -373,6 +375,18 @@ export interface Section {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -429,6 +443,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'sections';
         value: string | Section;
+      } | null)
+    | ({
+        relationTo: 'contact';
+        value: string | Contact;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -691,6 +709,17 @@ export interface SectionsSelect<T extends boolean = true> {
         resourceName?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  message?: T;
   updatedAt?: T;
   createdAt?: T;
 }

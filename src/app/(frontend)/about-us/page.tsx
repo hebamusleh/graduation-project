@@ -14,7 +14,7 @@ export default function AboutPage() {
         <div className="overflow-hidden shadow-lg w-full md:w-11/12 lg:w-4/5 mx-auto h-80 sm:h-96 md:h-[500px] lg:h-[70vh]">
           <div className="relative w-full h-full">
             <Image
-              src="/assets/images/about-hero-1.svg"
+              src="/assets/images/about-1.png"
               alt="Team discussing tech strategy"
               fill
               className="object-cover"
@@ -66,7 +66,7 @@ export default function AboutPage() {
         <div className="overflow-hidden shadow-lg w-full md:w-11/12 lg:w-4/5 mx-auto h-80 sm:h-96 md:h-[500px] lg:h-[75vh]">
           <div className="relative w-full h-full">
             <Image
-              src="/assets/images/about-hero-2.svg"
+              src="/assets/images/about-2.png"
               alt="Students collaborating"
               fill
               className="object-cover"
