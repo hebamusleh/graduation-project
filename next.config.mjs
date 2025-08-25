@@ -15,12 +15,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "3000",
-        pathname: "/api/media/file/**",
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/api/media/file/**',
       },
     ],
+    domains: ['picsum.photos', 'your-api-domain.com'],
   },
 }
 

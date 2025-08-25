@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getPostsAPI = async () => {
   try {
-    const res = await axios.get("/api/posts");
+    const res = await axios.get("/api/posts?depth=2");
     console.log("posts response : ", res.data);
     return res.data;
   } catch (e) {

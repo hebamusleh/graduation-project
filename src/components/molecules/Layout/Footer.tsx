@@ -35,7 +35,7 @@ function Footer() {
         <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-24">
           {/* First list */}
           <div className="flex flex-col space-y-3 lg:mt-6">
-            {["Home", "About Us", "Contact Us"].map((item) => (
+            {["Home", "About Us", "Contact Us" , "Privacy Policy"].map((item) => (
               <Link
                 key={item}
                 href={
@@ -51,8 +51,8 @@ function Footer() {
           </div>
 
           {/* Second list */}
-          <div className="flex flex-col space-y-3 lg:mt-6">
-            {["Terms & Conditions", "Privacy Policy", "Feedback"].map(
+          {/* <div className="flex flex-col space-y-3 lg:mt-6">
+            {["Terms & Conditions", "Privacy Policy", ].map(
               (item) => (
                 <Link
                   key={item}
@@ -67,7 +67,7 @@ function Footer() {
                 </Link>
               ),
             )}
-          </div>
+          </div> */}
 
           {/* Social Icons */}
           <div className="mt-6 flex justify-center space-x-4 sm:justify-start lg:justify-end">

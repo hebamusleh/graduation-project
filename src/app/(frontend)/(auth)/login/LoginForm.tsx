@@ -66,7 +66,8 @@ export default function LoginForm() {
         router.push('/admin')
         console.log('Redirecting to admin dashboard')
       } else if (user?.roles === 'mentor') {
-        console.log('Redirecting to mentor dashboard')
+        console.log('Redirecting to mentor dashboard');
+        router.push('/mentors-dashboard')
       } else {
         router.push('/student-page')
       }

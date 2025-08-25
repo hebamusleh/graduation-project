@@ -9,12 +9,12 @@ export function BlogCard({ post }: any) {
       <div className="flex flex-row">
         <div className="flex w-[110px] flex-shrink-0 flex-col items-center p-4">
           <Image
-            src={`${IMAGE_URL}${post?.mentor?.profilePhoto?.url}`}
+            src={`${post?.mentor?.profilePhoto?.url ? IMAGE_URL + post?.mentor?.profilePhoto?.url : "https://picsum.photos/200/300"}`}
             alt={post?.mentor?.fullName}
             width={110}
             height={110}
             className="rounded-full object-cover"
-          />
+          /> 
           <div className="mt-2 flex space-x-1">
             <span className="whitespace-nowrap text-sm font-medium text-gray-900">
               {post?.mentor?.fullName}
