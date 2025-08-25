@@ -1,10 +1,9 @@
 import { Footer, Header } from '@/components/molecules'
-import { QueryProvider } from '@/components/molecules/QueryProvider'
 import React from 'react'
 
 export const metadata = {
-  description: 'FOMO Tech - Mentors Dashboard',
-  title: 'FOMO Tech - Mentors Dashboard',
+  description: 'FOMO Tech - About Page',
+  title: 'FOMO Tech - About Page',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -13,11 +12,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <QueryProvider>
-          <Header isMentor={true} />
-          <main>{children}</main>
-          <Footer />
-        </QueryProvider>
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   )

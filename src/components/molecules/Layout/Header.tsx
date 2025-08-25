@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
 
 // import { Search }  from '@/components/icons/search'
 
-export default function Header() {
+export default function Header({ isMentor }: { isMentor: boolean }) {
   const [open, setOpen] = useState(false)
   const navItems = ['Home', 'Mentors']
 
@@ -51,7 +51,7 @@ export default function Header() {
         {/* LEFT GROUP: Logo + Nav */}
         <div className="flex items-center space-x-12">
           <Link
-            href="/home"
+            href={isMentor ? '/mentors-dashboard' : '/student-page'}
             className="flex items-center space-x-2 text-2xl font-bold text-blue-600"
           >
             <Logo className="h-8 w-8" />
@@ -61,7 +61,13 @@ export default function Header() {
             {navItems.map((t) => (
               <Link
                 key={t}
-                href={t === 'Home' ? '/home' : `/${t.toLowerCase()}`}
+                href={
+                  isMentor
+                    ? t === 'Home'
+                      ? '/mentors-dashboard'
+                      : '/student-page'
+                    : `/${t.toLowerCase()}`
+                }
                 className="hover:text-blue-600"
               >
                 {t}

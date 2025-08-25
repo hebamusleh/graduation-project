@@ -61,10 +61,9 @@ export default function LoginForm() {
     })
 
     if (result.success) {
-      const user = await getUser();
-      console.log('user page ',user)
+      const user = await getUser()
       if (user?.roles === 'admin') {
-        router.push('/admin-dashboard')
+        router.push('/admin')
         console.log('Redirecting to admin dashboard')
       } else if (user?.roles === 'mentor') {
         console.log('Redirecting to mentor dashboard')

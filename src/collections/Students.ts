@@ -1,53 +1,58 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig } from 'payload'
 
 export const Students: CollectionConfig = {
-  slug: "students",
+  slug: 'students',
   admin: {
-    useAsTitle: "userId",
+    useAsTitle: 'userId',
   },
   fields: [
     {
-      name: "userId",
-      type: "relationship",
-      relationTo: "users",
+      name: 'userId',
+      type: 'relationship',
+      relationTo: 'users',
       required: true,
       unique: true,
       filterOptions: {
-        roles: { equals: "student" },
+        roles: { equals: 'student' },
       },
     },
     {
-      name: "goal",
-      type: "text",
+      name: 'goal',
+      type: 'text',
       required: true,
     },
     {
-      name: "bio",
-      type: "textarea",
+      name: 'bio',
+      type: 'textarea',
       required: true,
     },
     {
-      name: "birthday",
-      type: "date",
+      name: 'birthday',
+      type: 'date',
       required: true,
     },
     {
-      name: "major",
-      type: "text",
+      name: 'major',
+      type: 'text',
       required: true,
     },
     {
-      name: "pronoun",
-      type: "text",
+      name: 'pronoun',
+      type: 'text',
       required: true,
     },
     {
-      name: "urlLinkedin",
-      type: "text",
+      name: 'urlLinkedin',
+      type: 'text',
     },
     {
-      name: "isAgree",
-      type: "checkbox",
+      name: 'isAgree',
+      type: 'checkbox',
+    },
+    {
+      name: 'profilePhoto',
+      type: 'upload',
+      relationTo: 'media',
     },
   ],
-};
+}

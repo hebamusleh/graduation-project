@@ -2,6 +2,7 @@
 
 import SaveIcon from "@/components/icons/save-2";
 import { Button } from "@/components/ui/button";
+import { IMAGE_URL } from "@/services/api";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
@@ -22,9 +23,9 @@ export function FeaturedPost({ post }: any) {
         `saved_${post.id}`,
         JSON.stringify({
           id: post.id,
-          authorName: post.mentorId.fullName,
-          authorRole: post.mentorId.role,
-          authorAvatarUrl: post.mentorId.profilPhoto.url,
+          authorName: post.mentor.fullName,
+          authorRole: post.mentor.userId.roles,
+          authorAvatarUrl: post.mentor.profilePhoto.url,
           title: post.post,
           excerpt: post.post.slice(0, 100) + "...",
         }),
@@ -51,8 +52,8 @@ export function FeaturedPost({ post }: any) {
       <div className="mb-4 flex items-center space-x-4">
         <div className="relative h-10 w-10 overflow-hidden rounded-full">
           <Image
-            src={post?.mentorId.profilPhoto.url}
-            alt={post?.mentorId.fullName}
+            src={`${IMAGE_URL}${post.mentor.profilePhoto.url}`}
+            alt={post?.mentor.fullName}
             width={40}
             height={40}
             className="object-cover"
@@ -60,9 +61,9 @@ export function FeaturedPost({ post }: any) {
         </div>
         <div className="flex flex-col">
           <span className="text-sm font-medium text-gray-900">
-            {post?.mentorId.fullName}
+            {post?.mentor.fullName}
           </span>
-          <span className="text-xs text-gray-500">{post?.mentorId.role}</span>
+          <span className="text-xs text-gray-500">{post?.mentor.userId.roles}</span>
         </div>
       </div>
 

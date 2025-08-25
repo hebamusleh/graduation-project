@@ -195,6 +195,7 @@ export interface Student {
   pronoun: string;
   urlLinkedin?: string | null;
   isAgree?: boolean | null;
+  profilePhoto?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -527,6 +528,7 @@ export interface StudentsSelect<T extends boolean = true> {
   pronoun?: T;
   urlLinkedin?: T;
   isAgree?: T;
+  profilePhoto?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -24,14 +24,14 @@ function ClientArticle({ slug }: { slug: string }) {
 
           {/* Full-width main image */}
           <div className="mb-8 w-full">
-            <Image
+            {/* <Image
               src={data.coverImage?.url}
               alt={data.name}
               width={1200}
               height={600}
               className="h-auto w-full rounded-lg object-cover"
               priority
-            />
+            /> */}
           </div>
 
           <section className="prose prose-lg mx-auto mb-8">

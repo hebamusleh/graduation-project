@@ -8,7 +8,6 @@ import { getUser } from '../_actions/getUser'
 
 export default async function ProfilePage() {
   const user = await getUser()
-  console.log('user data ', user)
   return (
     <main className="w-11/12 mx-auto px-6 py-10 max-w-[1536px]">
       <div className="flex flex-col lg:flex-row space-y-10 lg:space-y-0 lg:space-x-32">

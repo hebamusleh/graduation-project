@@ -1,23 +1,23 @@
 import { Card } from "@/components/ui/card";
+import { IMAGE_URL } from "@/services/api";
 import Image from "next/image";
 import Link from "next/link";
 
 export function BlogCard({ post }: any) {
-  console.log("single post : ", post);
   return (
     <Card className="w-full overflow-hidden rounded-2xl border-none shadow-sm transition hover:shadow-md">
       <div className="flex flex-row">
         <div className="flex w-[110px] flex-shrink-0 flex-col items-center p-4">
           <Image
-            src={post?.mentorId?.profilPhoto?.url}
-            alt={post?.mentorId?.fullName}
+            src={`${IMAGE_URL}${post?.mentor?.profilePhoto?.url}`}
+            alt={post?.mentor?.fullName}
             width={110}
             height={110}
             className="rounded-full object-cover"
           />
           <div className="mt-2 flex space-x-1">
             <span className="whitespace-nowrap text-sm font-medium text-gray-900">
-              {post?.mentorId?.fullName}
+              {post?.mentor?.fullName}
             </span>
           </div>
         </div>

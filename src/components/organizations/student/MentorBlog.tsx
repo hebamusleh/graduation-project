@@ -13,6 +13,8 @@ export default function MentorsBlogClient() {
   const { data: posts, isLoading } = useGetPosts();
   const [currentPage, setCurrentPage] = useState<number>(1);
 
+  console.log("posts",posts);
+
   useEffect(() => {
     const sp = searchParams.get("pageNumber");
     const pn = sp ? parseInt(sp, 10) : 1;
