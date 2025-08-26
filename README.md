@@ -14,7 +14,7 @@ FOMO Techno is a platform designed to guide Arab students in Software Engineerin
 
 ## 🚀 Features
 
--  As a student, I can:
+### As a student, I can:
   1. Read more about effective learning techniques.
   2. Explore software engineering blogs.
   3. Browse a list of available learning tracks.
@@ -26,11 +26,11 @@ FOMO Techno is a platform designed to guide Arab students in Software Engineerin
   9. Delete my account.
   10. Log in, sign up, and log out of the platform.
 
-- As a mentor, I can:
+### As a mentor, I can:
 1. Perform all actions that a student can.
 2. Create and publish blogs.
 
-- As an admin, I can:
+### As an admin, I can:
  1. Manage and control all aspects of the platform.
     
 ## 📂 Installation
